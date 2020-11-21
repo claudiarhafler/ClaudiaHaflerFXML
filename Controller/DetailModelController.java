@@ -6,15 +6,19 @@
 package Controller;
 
 import Model.Workoutcontentmodel;
-import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 
 /**
  *
  * @author claudia
  */
-class FXCollextions {
+class DetailModelController {
 
-    static ObservableList<Workoutcontentmodel> observableArrayList() {
+    void initData(Workoutcontentmodel selectedWorkout) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setPreviousScene(Scene currentScene) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Workoutcontentmodel;
+import java.io.IOException;
 import javafx.fxml.Initializable;
 
 
@@ -16,6 +17,10 @@ import java.util.Scanner;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -23,9 +28,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -509,11 +518,76 @@ public class FXMLDocumentController implements Initializable {
         }
 
     }
+    
+    
 
     private List<Workoutcontentmodel> readByNameAdvanced(String name) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+     @FXML
+    void actionShowDetails(ActionEvent event) throws IOException {
+        System.out.println("clicked");
+
+        
+        Workoutcontentmodel selectedWorkout = Table.getSelectionModel().getSelectedItem();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DetailModelView.fxml"));
+
+        Parent detailedModelView = loader.load();
+
+        Scene tableViewScene = new Scene(detailedModelView);
+
+        DetailModelController detailedControlled = loader.getController();
+
+
+        detailedControlled.initData(selectedWorkout);
+
+        // create a new state
+        Stage stage = new Stage();
+        stage.setScene(tableViewScene);
+        stage.show();
+
+    }
+
+    @FXML
+    void actionShowDetailsInPlace(ActionEvent event) throws IOException {
+        System.out.println("clicked");
+
+
+        Workoutcontentmodel selectedWorkout = Table.getSelectionModel().getSelectedItem();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DetailModelView.fxml"));
+
+
+        Parent detailedModelView = loader.load();
+
+
+        Scene tableViewScene = new Scene(detailedModelView);
+
+
+        DetailModelController detailedControlled = loader.getController();
+
+
+        detailedControlled.initData(selectedWorkout);
+
+        // pass current scene to return
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        detailedControlled.setPreviousScene(currentScene);
+
+        //This line gets the Stage information
+        Stage stage = (Stage) currentScene.getWindow();
+
+        stage.setScene(tableViewScene);
+        stage.show();
+    }
+
+    
+    @FXML
+    void showDetails(ActionEvent event) {
+
+    }
 
 }
 
