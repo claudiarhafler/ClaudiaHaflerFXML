@@ -13,10 +13,16 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -411,6 +417,104 @@ public class FXMLDocumentController implements Initializable {
         return model;
     }   
     
+    @FXML 
+    private TextField textboxName;
+    
+      @FXML
+    private TableView<Workoutcontentmodel> Table;
+
+    @FXML
+    private TableColumn<Workoutcontentmodel, Integer> ID;
+
+    @FXML
+    private TableColumn<Workoutcontentmodel, String> Exercise;
+
+    @FXML
+    private TableColumn<Workoutcontentmodel, Integer> Sets;
+
+    @FXML
+    private TableColumn<Workoutcontentmodel, Integer> Reps;
+
+    @FXML
+    private Button Search;
+
+    @FXML
+    void Clicked(ActionEvent event) {
+
+    }
+    
+    private ObservableList<Workoutcontentmodel> workoutData;
+
+    public void setTableData(List<Workoutcontentmodel> workoutList){
+        workoutData = FXCollextions.observableArrayList();
+        
+        workoutList.forEach(s -> {
+            workoutData.add(s);
+        });
+        
+        Table.setItems(workoutData);
+        Table.refresh();
+    }
+    
+     @FXML
+    void searchByNameAction(ActionEvent event) {
+        System.out.println("clicked");
+
+        // getting the name from input box        
+        String name = textboxName.getText();
+
+        // calling a db read operaiton, readByName
+        List<Workoutcontentmodel> workouts = readByName(name);
+
+        if (workouts == null || workouts.isEmpty()) {
+
+            // show an alert to inform user 
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("No Content Found");// line 2
+            alert.setHeaderText("Could Not Find");// line 3
+            alert.setContentText("No Workout");// line 4
+            alert.showAndWait(); // line 5
+        } else {
+
+            // setting table data
+            setTableData(workouts);
+        }
+
+    }
+    
+     @FXML
+    void searchByNameAdvancedAction(ActionEvent event) {
+        System.out.println("clicked");
+
+        // getting the name from input box        
+        String name = textboxName.getText();
+
+        // calling a db read operaiton, readByName
+        List<Workoutcontentmodel> workouts = readByNameAdvanced(name);
+
+        // setting table data
+        //setTableData(students);
+        // add an alert
+        if (workouts == null || workouts.isEmpty()) {
+
+            // show an alert to inform user 
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Searched Content Not Found");// line 2
+            alert.setHeaderText("Could Not Find");// line 3
+            alert.setContentText("No Workout");// line 4
+            alert.showAndWait(); // line 5
+        } else {
+            // setting table data
+            setTableData(workouts);
+        }
+
+    }
+
+    private List<Workoutcontentmodel> readByNameAdvanced(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+
 }
 
                 

@@ -2,9 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="322.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
     <children>
         <Button fx:id="button" layoutX="126.0" layoutY="148.0" onAction="#handleButtonAction" text="Click Me!" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
@@ -14,5 +18,17 @@
       <Button fx:id="deleteButton" layoutX="251.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteWorkout" text="Delete" />
       <Button fx:id="repsandSets" layoutX="65.0" layoutY="100.0" mnemonicParsing="false" onAction="#getRepsAndSets" text="Reps and Sets" />
       <Button fx:id="idAndWorkout" layoutX="186.0" layoutY="100.0" mnemonicParsing="false" onAction="#idAndWorkout" text="ID and Workout" />
+      <TableView fx:id="Table" layoutX="12.0" layoutY="269.0" prefHeight="231.0" prefWidth="303.0">
+        <columns>
+          <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="Exercise" prefWidth="75.0" text="Exercise" />
+            <TableColumn fx:id="Sets" prefWidth="78.0" text="Sets" />
+            <TableColumn fx:id="Reps" prefWidth="72.0" text="Reps" />
+        </columns>
+      </TableView>
+      <Button fx:id="Search" layoutX="249.0" layoutY="198.0" mnemonicParsing="false" onAction="#Clicked" text="Search" />
+      <TextField layoutX="14.0" layoutY="198.0" prefHeight="27.0" prefWidth="225.0" />
+      <Text layoutX="31.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Workouts" />
+      <Button layoutX="204.0" layoutY="230.0" mnemonicParsing="false" onAction="#searchByNameAdvancedAction" text="Advanced Search" />
     </children>
 </AnchorPane>
