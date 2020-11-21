@@ -588,6 +588,37 @@ public class FXMLDocumentController implements Initializable {
     void showDetails(ActionEvent event) {
 
     }
+    
+    @FXML
+    void backButtonAction(ActionEvent event) {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+ 
+        
+        if (previousScene != null) {
+            stage.setScene(previousScene);
+        }
+
+    }
+
+    Workoutcontentmodel selectedModel;
+    Scene previousScene;
+
+    public void setPreviousScene(Scene scene) {
+        previousScene = scene;
+        backButton.setDisable(false);
+
+    }
+
+    private static class backButton {
+
+        private static void setDisable(boolean b) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public backButton() {
+        }
+    }
 
 }
 
